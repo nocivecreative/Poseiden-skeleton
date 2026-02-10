@@ -24,6 +24,7 @@ public class SecurityUser implements UserDetails {
     private final Integer id;
     private final String username;
     private final String role;
+    private static final String ROLE_PREFIX = "ROLE_";
     private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
 
@@ -33,7 +34,7 @@ public class SecurityUser implements UserDetails {
         this.role = user.getRole();
         this.password = user.getPassword();
         // this.authorities = List.of(new SimpleGrantedAuthority("ROLE_USER"));
-        this.authorities = List.of(new SimpleGrantedAuthority("ROLE_" + this.role));
+        this.authorities = List.of(new SimpleGrantedAuthority(ROLE_PREFIX + this.role));
     }
 
 }
