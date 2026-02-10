@@ -15,7 +15,7 @@ import jakarta.validation.constraints.NotBlank;
 public class BidList {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BidListId")
     // TODO : prze : ALTER TABLE pour integer Vs. tinyint (seuleument 127 entrées
     // possible)
