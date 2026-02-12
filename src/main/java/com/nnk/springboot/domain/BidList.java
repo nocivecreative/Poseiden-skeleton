@@ -10,12 +10,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "bidlist")
 @Getter
 @Setter
+@NoArgsConstructor
 public class BidList {
 
     @Id
@@ -91,5 +93,18 @@ public class BidList {
 
     @Column(name = "side", length = 125)
     private String side;
+
+    public BidList(String account, String type, Double bidQuantity) {
+        this.account = account;
+        this.type = type;
+        this.bidQuantity = bidQuantity;
+    }
+
+    public BidList(Integer bidListId, String account, String type, Double bidQuantity) {
+        this.bidListId = bidListId;
+        this.account = account;
+        this.type = type;
+        this.bidQuantity = bidQuantity;
+    }
 
 }
