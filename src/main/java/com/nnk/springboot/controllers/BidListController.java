@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.dto.request.AddBidListDTO;
-import com.nnk.springboot.dto.response.BidListDTO;
-import com.nnk.springboot.dto.response.UpdateBidListDTO;
+import com.nnk.springboot.dto.BidList.BidListDTO;
+import com.nnk.springboot.dto.BidList.CreateBidListDTO;
 import com.nnk.springboot.security.SecurityUser;
 import com.nnk.springboot.service.BidListService;
 
@@ -46,12 +45,12 @@ public class BidListController {
 
     @PostMapping("/validate")
     public String validate(
-            @Valid @ModelAttribute("bidList") AddBidListDTO addBidListDTO,
+            @Valid @ModelAttribute("bidList") CreateBidListDTO createBidListDTO,
             BindingResult result,
             Model model) {
         // TODO: 3 champs seuleument ?
 
-        bidListService.addBidList(addBidListDTO);
+        bidListService.addBidList(createBidListDTO);
 
         return "redirect:/bidList/list";
     }
@@ -61,14 +60,14 @@ public class BidListController {
             Model model) {
         // TODO: rq idem add
 
-        UpdateBidListDTO bl = bidListService.getBildListById(id);
+        BidListDTO bl = bidListService.getBildListById(id);
         model.addAttribute("bidList", bl);
         return "bidList/update";
     }
 
     @PostMapping("/update/{id}")
     public String updateBid(@PathVariable("id") Integer id,
-            @Valid @ModelAttribute("BidList") UpdateBidListDTO bl,
+            @Valid @ModelAttribute("BidList") BidListDTO bl,
             BindingResult result,
             Model model) {
 

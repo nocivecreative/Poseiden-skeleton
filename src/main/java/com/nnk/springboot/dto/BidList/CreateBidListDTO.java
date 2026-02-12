@@ -1,4 +1,4 @@
-package com.nnk.springboot.dto.response;
+package com.nnk.springboot.dto.BidList;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -7,9 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class BidListDTO {
+public class CreateBidListDTO {
 
-    private final Integer id;
     private final String account;
     private final String type;
     private final Double bidQuantity;

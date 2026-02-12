@@ -6,9 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.dto.request.AddBidListDTO;
-import com.nnk.springboot.dto.response.BidListDTO;
-import com.nnk.springboot.dto.response.UpdateBidListDTO;
+import com.nnk.springboot.dto.BidList.BidListDTO;
+import com.nnk.springboot.dto.BidList.CreateBidListDTO;
 import com.nnk.springboot.repositories.BidListRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -34,19 +33,19 @@ public class BidListService {
     }
 
     @Transactional
-    public void addBidList(AddBidListDTO addBidListDTO) {
+    public void addBidList(CreateBidListDTO createBidListDTO) {
         BidList bl = new BidList(
-                addBidListDTO.getAccount(),
-                addBidListDTO.getType(),
-                addBidListDTO.getBidQuantity());
+                createBidListDTO.getAccount(),
+                createBidListDTO.getType(),
+                createBidListDTO.getBidQuantity());
         bidListRepository.save(bl);
     }
 
     @Transactional
-    public UpdateBidListDTO getBildListById(Integer id) {
+    public BidListDTO getBildListById(Integer id) {
 
         return bidListRepository.findById(id)
-                .map(bl -> new UpdateBidListDTO(
+                .map(bl -> new BidListDTO(
                         bl.getBidListId(),
                         bl.getAccount(),
                         bl.getType(),
@@ -55,7 +54,7 @@ public class BidListService {
     }
 
     @Transactional
-    public void updateBidList(Integer id, UpdateBidListDTO blDTO) {
+    public void updateBidList(Integer id, BidListDTO blDTO) {
 
         if (!bidListRepository.existsById(id))
             throw new IllegalArgumentException("BidList not found with id: " + id);
