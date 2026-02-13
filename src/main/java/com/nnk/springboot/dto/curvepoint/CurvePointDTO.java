@@ -1,15 +1,18 @@
 package com.nnk.springboot.dto.curvepoint;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class CurvePointDTO {
-    private final Integer id;
-    private final Integer curvePointId;
-    private final Double term;
-    private final Double value;
+
+    private Integer id;
+    private Integer curveId;
+    private Double term;
+    private Double value;
 }

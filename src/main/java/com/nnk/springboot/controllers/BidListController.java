@@ -2,7 +2,6 @@ package com.nnk.springboot.controllers;
 
 import java.util.List;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,10 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.dto.BidList.BidListDTO;
 import com.nnk.springboot.dto.BidList.CreateBidListDTO;
-import com.nnk.springboot.security.SecurityUser;
 import com.nnk.springboot.service.BidListService;
 
 import jakarta.validation.Valid;
@@ -29,17 +26,15 @@ public class BidListController {
     private final BidListService bidListService;
 
     @GetMapping("/list")
-    public String home(Model model,
-            @AuthenticationPrincipal SecurityUser currentUser) {
-        // TODO: All ?
-
+    public String home(Model model) {
         List<BidListDTO> blList = bidListService.getAllBidList();
         model.addAttribute("bidLists", blList);
         return "bidList/list";
     }
 
     @GetMapping("/add")
-    public String addBidForm(BidList bid) {
+    public String addBidForm(Model model) {
+        model.addAttribute("bidList", new CreateBidListDTO());
         return "bidList/add";
     }
 
@@ -48,28 +43,32 @@ public class BidListController {
             @Valid @ModelAttribute("bidList") CreateBidListDTO createBidListDTO,
             BindingResult result,
             Model model) {
-        // TODO: 3 champs seuleument ?
+
+        if (result.hasErrors()) {
+            return "bidList/add";
+        }
 
         bidListService.addBidList(createBidListDTO);
-
         return "redirect:/bidList/list";
     }
 
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id,
             Model model) {
-        // TODO: rq idem add
-
-        BidListDTO bl = bidListService.getBildListById(id);
+        BidListDTO bl = bidListService.getBidListById(id);
         model.addAttribute("bidList", bl);
         return "bidList/update";
     }
 
     @PostMapping("/update/{id}")
     public String updateBid(@PathVariable("id") Integer id,
-            @Valid @ModelAttribute("BidList") BidListDTO bl,
+            @Valid @ModelAttribute("bidList") BidListDTO bl,
             BindingResult result,
             Model model) {
+
+        if (result.hasErrors()) {
+            return "bidList/update";
+        }
 
         bidListService.updateBidList(id, bl);
         return "redirect:/bidList/list";
@@ -77,9 +76,7 @@ public class BidListController {
 
     @GetMapping("/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Bid by Id and delete the bid, return to Bid list
         bidListService.deleteBidList(id);
-
         return "redirect:/bidList/list";
     }
 }

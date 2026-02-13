@@ -20,7 +20,6 @@ public class BidListService {
 
     @Transactional(readOnly = true)
     public List<BidListDTO> getAllBidList() {
-
         return bidListRepository
                 .findAll()
                 .stream()
@@ -41,9 +40,8 @@ public class BidListService {
         bidListRepository.save(bl);
     }
 
-    @Transactional
-    public BidListDTO getBildListById(Integer id) {
-
+    @Transactional(readOnly = true)
+    public BidListDTO getBidListById(Integer id) {
         return bidListRepository.findById(id)
                 .map(bl -> new BidListDTO(
                         bl.getBidListId(),
@@ -55,20 +53,17 @@ public class BidListService {
 
     @Transactional
     public void updateBidList(Integer id, BidListDTO blDTO) {
+        BidList bl = bidListRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("BidList not found with id: " + id));
 
-        if (!bidListRepository.existsById(id))
-            throw new IllegalArgumentException("BidList not found with id: " + id);
-
-        BidList bl = new BidList(
-                id,
-                blDTO.getAccount(),
-                blDTO.getType(),
-                blDTO.getBidQuantity());
+        bl.setAccount(blDTO.getAccount());
+        bl.setType(blDTO.getType());
+        bl.setBidQuantity(blDTO.getBidQuantity());
 
         bidListRepository.save(bl);
-
     }
 
+    @Transactional
     public void deleteBidList(Integer id) {
         if (!bidListRepository.existsById(id))
             throw new IllegalArgumentException("BidList not found with id: " + id);

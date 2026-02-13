@@ -1,17 +1,27 @@
 package com.nnk.springboot.dto.BidList;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class BidListDTO {
 
-    private final Integer bidListId;
-    private final String account;
-    private final String type;
-    private final Double bidQuantity;
+    private Integer bidListId;
+
+    @NotBlank(message = "Account is mandatory")
+    private String account;
+
+    @NotBlank(message = "Type is mandatory")
+    private String type;
+
+    @NotNull(message = "Bid Quantity is mandatory")
+    private Double bidQuantity;
 
 }
