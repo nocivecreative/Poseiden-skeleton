@@ -9,12 +9,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "curvepoint")
 @Getter
 @Setter
+@NoArgsConstructor
 public class CurvePoint {
 
     @Id
@@ -38,5 +40,16 @@ public class CurvePoint {
 
     @Column(name = "creationDate")
     private Timestamp creationDate;
+
+    public CurvePoint(Double term, Double value) {
+        this.term = term;
+        this.value = value;
+    }
+
+    public CurvePoint(Integer id, Double term, Double value) {
+        this.id = id;
+        this.term = term;
+        this.value = value;
+    }
 
 }
