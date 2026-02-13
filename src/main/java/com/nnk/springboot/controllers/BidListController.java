@@ -33,8 +33,8 @@ public class BidListController {
             @AuthenticationPrincipal SecurityUser currentUser) {
         // TODO: All ?
 
-        List<BidListDTO> bl = bidListService.getAllBidList();
-        model.addAttribute("bidLists", bl);
+        List<BidListDTO> blList = bidListService.getAllBidList();
+        model.addAttribute("bidLists", blList);
         return "bidList/list";
     }
 
