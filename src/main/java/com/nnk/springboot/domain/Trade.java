@@ -43,7 +43,7 @@ public class Trade {
     @Column(name = "sellPrice")
     private Double sellPrice;
 
-    @Column(name = "tradeDate")
+    @Column(name = "tradeDate", insertable = false, updatable = false)
     private Timestamp tradeDate;
 
     @Column(name = "security", length = 125)
@@ -64,13 +64,13 @@ public class Trade {
     @Column(name = "creationName", length = 125)
     private String creationName;
 
-    @Column(name = "creationDate")
+    @Column(name = "creationDate", insertable = false, updatable = false)
     private Timestamp creationDate;
 
     @Column(name = "revisionName", length = 125)
     private String revisionName;
 
-    @Column(name = "revisionDate")
+    @Column(name = "revisionDate", insertable = false, updatable = false)
     private Timestamp revisionDate;
 
     @Column(name = "dealName", length = 125)

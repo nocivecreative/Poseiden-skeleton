@@ -12,9 +12,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CreateCurvePointDTO {
 
-    @NotNull(message = "Term is mandatory")
+    @NotNull(message = "must not be null")
+    private Integer curveId;
     private Double term;
-
-    @NotNull(message = "Value is mandatory")
     private Double value;
 }

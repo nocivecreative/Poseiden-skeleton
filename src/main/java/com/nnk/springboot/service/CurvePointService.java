@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.dto.curvepoint.CreateCurvePointDTO;
 import com.nnk.springboot.dto.curvepoint.CurvePointDTO;
-import com.nnk.springboot.dto.curvepoint.EditCurvePointDTO;
 import com.nnk.springboot.repositories.CurvePointRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -35,26 +34,29 @@ public class CurvePointService {
     @Transactional
     public void addCurvePoint(CreateCurvePointDTO createCurvePointDTO) {
         CurvePoint cp = new CurvePoint(
+                createCurvePointDTO.getCurveId(),
                 createCurvePointDTO.getTerm(),
                 createCurvePointDTO.getValue());
         curvePointRepository.save(cp);
     }
 
     @Transactional(readOnly = true)
-    public EditCurvePointDTO getCurvePointById(Integer id) {
+    public CurvePointDTO getCurvePointById(Integer id) {
         return curvePointRepository.findById(id)
-                .map(cp -> new EditCurvePointDTO(
+                .map(cp -> new CurvePointDTO(
                         cp.getId(),
+                        cp.getCurveId(),
                         cp.getTerm(),
                         cp.getValue()))
                 .orElseThrow(() -> new IllegalArgumentException("CurvePoint not found with id: " + id));
     }
 
     @Transactional
-    public void updateCurvePoint(Integer id, EditCurvePointDTO cpDTO) {
+    public void updateCurvePoint(Integer id, CurvePointDTO cpDTO) {
         CurvePoint cp = curvePointRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("CurvePoint not found with id: " + id));
 
+        cp.setCurveId(cpDTO.getCurveId());
         cp.setTerm(cpDTO.getTerm());
         cp.setValue(cpDTO.getValue());
 

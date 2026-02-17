@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nnk.springboot.dto.curvepoint.CreateCurvePointDTO;
 import com.nnk.springboot.dto.curvepoint.CurvePointDTO;
-import com.nnk.springboot.dto.curvepoint.EditCurvePointDTO;
 import com.nnk.springboot.service.CurvePointService;
 
 import jakarta.validation.Valid;
@@ -54,14 +53,14 @@ public class CurveController {
 
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        EditCurvePointDTO cp = curvePointService.getCurvePointById(id);
+        CurvePointDTO cp = curvePointService.getCurvePointById(id);
         model.addAttribute("curvePoint", cp);
         return "curvePoint/update";
     }
 
     @PostMapping("/update/{id}")
     public String updateCurvePoint(@PathVariable("id") Integer id,
-            @Valid @ModelAttribute("curvePoint") EditCurvePointDTO cp,
+            @Valid @ModelAttribute("curvePoint") CurvePointDTO cp,
             BindingResult result, Model model) {
 
         if (result.hasErrors()) {
