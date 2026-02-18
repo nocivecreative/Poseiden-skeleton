@@ -8,15 +8,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "curvepoint")
+@Builder
+@NoArgsConstructor(force = true, access = lombok.AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Getter
-@Setter
-@NoArgsConstructor
 public class CurvePoint {
 
     @Id
@@ -24,34 +26,21 @@ public class CurvePoint {
     @Column(name = "Id")
     // TODO : prze : ALTER TABLE pour integer Vs. tinyint (seuleument 127 entrées
     // possible)
-    private Integer id;
+    private final Integer id;
 
     @Column(name = "CurveId")
-    private Integer curveId;
+    private final Integer curveId;
 
     @Column(name = "asOfDate")
-    private Timestamp asOfDate;
+    private final Timestamp asOfDate;
 
     @Column(name = "term")
-    private Double term;
+    private final Double term;
 
     @Column(name = "value")
-    private Double value;
+    private final Double value;
 
     @Column(name = "creationDate")
-    private Timestamp creationDate;
-
-    public CurvePoint(Integer curveId, Double term, Double value) {
-        this.curveId = curveId;
-        this.term = term;
-        this.value = value;
-    }
-
-    public CurvePoint(Integer id, Integer curveId, Double term, Double value) {
-        this.id = id;
-        this.curveId = curveId;
-        this.term = term;
-        this.value = value;
-    }
+    private final Timestamp creationDate;
 
 }

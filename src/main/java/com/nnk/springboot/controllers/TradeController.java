@@ -34,7 +34,7 @@ public class TradeController {
 
     @GetMapping("/add")
     public String addTradeForm(Model model) {
-        model.addAttribute("trade", new CreateTradeDTO());
+        model.addAttribute("trade", CreateTradeDTO.builder().build());
         return "trade/add";
     }
 

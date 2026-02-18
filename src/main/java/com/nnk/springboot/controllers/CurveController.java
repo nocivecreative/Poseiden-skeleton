@@ -34,7 +34,7 @@ public class CurveController {
 
     @GetMapping("/add")
     public String addCurvePointForm(Model model) {
-        model.addAttribute("curvePoint", new CreateCurvePointDTO());
+        model.addAttribute("curvePoint", CreateCurvePointDTO.builder().build());
         return "curvePoint/add";
     }
 

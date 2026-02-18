@@ -2,18 +2,20 @@ package com.nnk.springboot.dto.curvepoint;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
 public class CreateCurvePointDTO {
 
-    @NotNull(message = "must not be null")
-    private Integer curveId;
-    private Double term;
-    private Double value;
+    @NotNull(message = "Curve ID must not be null")
+    private final Integer curveId;
+
+    @NotNull(message = "Term must not be null")
+    private final Double term;
+
+    @NotNull(message = "Value must not be null")
+    private final Double value;
 }

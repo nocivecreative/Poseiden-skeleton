@@ -34,7 +34,7 @@ public class RuleNameController {
 
     @GetMapping("/add")
     public String addRuleNameForm(Model model) {
-        model.addAttribute("ruleName", new CreateRuleNameDTO());
+        model.addAttribute("ruleName", CreateRuleNameDTO.builder().build());
         return "ruleName/add";
     }
 

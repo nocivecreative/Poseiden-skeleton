@@ -9,15 +9,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "bidlist")
+@Builder
+@NoArgsConstructor(force = true, access = lombok.AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Getter
-@Setter
-@NoArgsConstructor
 public class BidList {
 
     @Id
@@ -29,82 +31,69 @@ public class BidList {
 
     @NotBlank(message = "Account is mandatory")
     @Column(name = "account", length = 30, nullable = false)
-    private String account;
+    private final String account;
 
     @NotBlank(message = "Type is mandatory")
     @Column(name = "type", length = 30, nullable = false)
-    private String type;
+    private final String type;
 
     @Column(name = "bidQuantity")
-    private Double bidQuantity;
+    private final Double bidQuantity;
 
     @Column(name = "askQuantity")
-    private Double askQuantity;
+    private final Double askQuantity;
 
     @Column(name = "bid")
-    private Double bid;
+    private final Double bid;
 
     @Column(name = "ask")
-    private Double ask;
+    private final Double ask;
 
     @Column(name = "benchmark", length = 125)
-    private String benchmark;
+    private final String benchmark;
 
     @Column(name = "bidListDate")
-    private Timestamp bidListDate;
+    private final Timestamp bidListDate;
 
     @Column(name = "commentary", length = 125)
-    private String commentary;
+    private final String commentary;
 
     @Column(name = "security", length = 125)
-    private String security;
+    private final String security;
 
     @Column(name = "status", length = 10)
-    private String status;
+    private final String status;
 
     @Column(name = "trader", length = 125)
-    private String trader;
+    private final String trader;
 
     @Column(name = "book", length = 125)
-    private String book;
+    private final String book;
 
     @Column(name = "creationName", length = 125)
-    private String creationName;
+    private final String creationName;
 
     @Column(name = "creationDate")
     // TODO : prez : DEFAULT NULL ('0000-00-00 00:00:00' pas accepté en mysql 8+)
-    private Timestamp creationDate;
+    private final Timestamp creationDate;
 
     @Column(name = "revisionName", length = 125)
-    private String revisionName;
+    private final String revisionName;
 
     @Column(name = "revisionDate")
     // TODO : prez : DEFAULT NULL ('0000-00-00 00:00:00' pas accepté en mysql 8+)
-    private Timestamp revisionDate;
+    private final Timestamp revisionDate;
 
     @Column(name = "dealName", length = 125)
-    private String dealName;
+    private final String dealName;
 
     @Column(name = "dealType", length = 125)
-    private String dealType;
+    private final String dealType;
 
     @Column(name = "sourceListId", length = 125)
-    private String sourceListId;
+    private final String sourceListId;
 
     @Column(name = "side", length = 125)
-    private String side;
-
-    public BidList(String account, String type, Double bidQuantity) {
-        this.account = account;
-        this.type = type;
-        this.bidQuantity = bidQuantity;
-    }
-
-    public BidList(Integer bidListId, String account, String type, Double bidQuantity) {
-        this.bidListId = bidListId;
-        this.account = account;
-        this.type = type;
-        this.bidQuantity = bidQuantity;
-    }
+    private final String side;
 
 }

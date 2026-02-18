@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.dto.BidList.BidListDTO;
-import com.nnk.springboot.dto.BidList.CreateBidListDTO;
+import com.nnk.springboot.dto.bidlist.BidListDTO;
+import com.nnk.springboot.dto.bidlist.CreateBidListDTO;
 import com.nnk.springboot.repositories.BidListRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -20,45 +20,49 @@ public class BidListService {
 
     @Transactional(readOnly = true)
     public List<BidListDTO> getAllBidList() {
-        return bidListRepository
-                .findAll()
-                .stream()
-                .map(bl -> new BidListDTO(
-                        bl.getBidListId(),
-                        bl.getAccount(),
-                        bl.getType(),
-                        bl.getBidQuantity()))
+        return bidListRepository.findAll().stream()
+                .map(bl -> BidListDTO.builder()
+                        .bidListId(bl.getBidListId())
+                        .account(bl.getAccount())
+                        .type(bl.getType())
+                        .bidQuantity(bl.getBidQuantity())
+                        .build())
                 .toList();
     }
 
     @Transactional
     public void addBidList(CreateBidListDTO createBidListDTO) {
-        BidList bl = new BidList(
-                createBidListDTO.getAccount(),
-                createBidListDTO.getType(),
-                createBidListDTO.getBidQuantity());
+        BidList bl = BidList.builder()
+                .account(createBidListDTO.getAccount())
+                .type(createBidListDTO.getType())
+                .bidQuantity(createBidListDTO.getBidQuantity())
+                .build();
         bidListRepository.save(bl);
     }
 
     @Transactional(readOnly = true)
     public BidListDTO getBidListById(Integer id) {
         return bidListRepository.findById(id)
-                .map(bl -> new BidListDTO(
-                        bl.getBidListId(),
-                        bl.getAccount(),
-                        bl.getType(),
-                        bl.getBidQuantity()))
+                .map(bl -> BidListDTO.builder()
+                        .bidListId(bl.getBidListId())
+                        .account(bl.getAccount())
+                        .type(bl.getType())
+                        .bidQuantity(bl.getBidQuantity())
+                        .build())
                 .orElseThrow(() -> new IllegalArgumentException("BidList not found with id: " + id));
     }
 
     @Transactional
     public void updateBidList(Integer id, BidListDTO blDTO) {
-        BidList bl = bidListRepository.findById(id)
+        bidListRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("BidList not found with id: " + id));
 
-        bl.setAccount(blDTO.getAccount());
-        bl.setType(blDTO.getType());
-        bl.setBidQuantity(blDTO.getBidQuantity());
+        BidList bl = BidList.builder()
+                .bidListId(id)
+                .account(blDTO.getAccount())
+                .type(blDTO.getType())
+                .bidQuantity(blDTO.getBidQuantity())
+                .build();
 
         bidListRepository.save(bl);
     }

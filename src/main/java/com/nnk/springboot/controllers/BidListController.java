@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.nnk.springboot.dto.BidList.BidListDTO;
-import com.nnk.springboot.dto.BidList.CreateBidListDTO;
+import com.nnk.springboot.dto.bidlist.BidListDTO;
+import com.nnk.springboot.dto.bidlist.CreateBidListDTO;
 import com.nnk.springboot.service.BidListService;
 
 import jakarta.validation.Valid;
@@ -34,7 +34,7 @@ public class BidListController {
 
     @GetMapping("/add")
     public String addBidForm(Model model) {
-        model.addAttribute("bidList", new CreateBidListDTO());
+        model.addAttribute("bidList", CreateBidListDTO.builder().build());
         return "bidList/add";
     }
 

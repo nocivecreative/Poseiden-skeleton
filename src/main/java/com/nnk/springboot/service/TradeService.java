@@ -20,46 +20,49 @@ public class TradeService {
 
     @Transactional(readOnly = true)
     public List<TradeDTO> getAllTrades() {
-        return tradeRepository
-                .findAll()
-                .stream()
-                .map(t -> new TradeDTO(
-                        t.getTradeId(),
-                        t.getAccount(),
-                        t.getType(),
-                        t.getBuyQuantity()))
+        return tradeRepository.findAll().stream()
+                .map(t -> TradeDTO.builder()
+                        .tradeId(t.getTradeId())
+                        .account(t.getAccount())
+                        .type(t.getType())
+                        .buyQuantity(t.getBuyQuantity())
+                        .build())
                 .toList();
     }
 
     @Transactional
     public void addTrade(CreateTradeDTO dto) {
-        Trade trade = new Trade();
-        trade.setAccount(dto.getAccount());
-        trade.setType(dto.getType());
-        trade.setBuyQuantity(dto.getBuyQuantity());
+        Trade trade = Trade.builder()
+                .account(dto.getAccount())
+                .type(dto.getType())
+                .buyQuantity(dto.getBuyQuantity())
+                .build();
         tradeRepository.save(trade);
     }
 
     @Transactional(readOnly = true)
     public TradeDTO getTradeById(Integer id) {
         return tradeRepository.findById(id)
-                .map(t -> new TradeDTO(
-                        t.getTradeId(),
-                        t.getAccount(),
-                        t.getType(),
-                        t.getBuyQuantity()))
+                .map(t -> TradeDTO.builder()
+                        .tradeId(t.getTradeId())
+                        .account(t.getAccount())
+                        .type(t.getType())
+                        .buyQuantity(t.getBuyQuantity())
+                        .build())
                 .orElseThrow(() -> new IllegalArgumentException("Trade not found with id: " + id));
     }
 
     @Transactional
     public void updateTrade(Integer id, TradeDTO dto) {
-        Trade trade = tradeRepository.findById(id)
+        tradeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Trade not found with id: " + id));
 
-        trade.setAccount(dto.getAccount());
-        trade.setType(dto.getType());
-        trade.setBuyQuantity(dto.getBuyQuantity());
-
+        Trade trade = Trade.builder()
+                .tradeId(id)
+                .account(dto.getAccount())
+                .type(dto.getType())
+                .buyQuantity(dto.getBuyQuantity())
+                .build();
         tradeRepository.save(trade);
     }
 

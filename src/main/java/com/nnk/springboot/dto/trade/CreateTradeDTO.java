@@ -1,22 +1,20 @@
 package com.nnk.springboot.dto.trade;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 public class CreateTradeDTO {
 
     @NotBlank(message = "Account is mandatory")
-    private String account;
+    private final String account;
 
     @NotBlank(message = "Type is mandatory")
-    private String type;
+    private final String type;
 
-    private Double buyQuantity;
+    @NotNull(message = "Buy quantity must not be null")
+    private final Double buyQuantity;
 }

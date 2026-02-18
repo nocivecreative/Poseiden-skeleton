@@ -23,42 +23,48 @@ public class CurvePointService {
         return curvePointRepository
                 .findAll()
                 .stream()
-                .map(cp -> new CurvePointDTO(
-                        cp.getId(),
-                        cp.getCurveId(),
-                        cp.getTerm(),
-                        cp.getValue()))
+                .map(cp -> CurvePointDTO.builder()
+                        .id(cp.getId())
+                        .curveId(cp.getCurveId())
+                        .term(cp.getTerm())
+                        .value(cp.getValue())
+                        .build())
                 .toList();
     }
 
     @Transactional
     public void addCurvePoint(CreateCurvePointDTO createCurvePointDTO) {
-        CurvePoint cp = new CurvePoint(
-                createCurvePointDTO.getCurveId(),
-                createCurvePointDTO.getTerm(),
-                createCurvePointDTO.getValue());
+        CurvePoint cp = CurvePoint.builder()
+                .curveId(createCurvePointDTO.getCurveId())
+                .term(createCurvePointDTO.getTerm())
+                .value(createCurvePointDTO.getValue())
+                .build();
         curvePointRepository.save(cp);
     }
 
     @Transactional(readOnly = true)
     public CurvePointDTO getCurvePointById(Integer id) {
         return curvePointRepository.findById(id)
-                .map(cp -> new CurvePointDTO(
-                        cp.getId(),
-                        cp.getCurveId(),
-                        cp.getTerm(),
-                        cp.getValue()))
+                .map(cp -> CurvePointDTO.builder()
+                        .id(cp.getId())
+                        .curveId(cp.getCurveId())
+                        .term(cp.getTerm())
+                        .value(cp.getValue())
+                        .build())
                 .orElseThrow(() -> new IllegalArgumentException("CurvePoint not found with id: " + id));
     }
 
     @Transactional
     public void updateCurvePoint(Integer id, CurvePointDTO cpDTO) {
-        CurvePoint cp = curvePointRepository.findById(id)
+        curvePointRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("CurvePoint not found with id: " + id));
 
-        cp.setCurveId(cpDTO.getCurveId());
-        cp.setTerm(cpDTO.getTerm());
-        cp.setValue(cpDTO.getValue());
+        CurvePoint cp = CurvePoint.builder()
+                .id(cpDTO.getId())
+                .curveId(cpDTO.getCurveId())
+                .term(cpDTO.getTerm())
+                .value(cpDTO.getValue())
+                .build();
 
         curvePointRepository.save(cp);
     }

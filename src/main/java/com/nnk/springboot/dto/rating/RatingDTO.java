@@ -1,19 +1,25 @@
 package com.nnk.springboot.dto.rating;
 
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 public class RatingDTO {
 
-    private Integer id;
-    private String moodysRating;
-    private String sandPRating;
-    private String fitchRating;
-    private Integer orderNumber;
+    private final Integer id;
+
+    @NotBlank(message = "MoodysRating is mandatory")
+    private final String moodysRating;
+
+    @NotBlank(message = "SandPRating is mandatory")
+    private final String sandPRating;
+
+    @NotBlank(message = "FitchRating is mandatory")
+    private final String fitchRating;
+
+    @NotNull(message = "Order number must not be null")
+    private final Integer orderNumber;
 }

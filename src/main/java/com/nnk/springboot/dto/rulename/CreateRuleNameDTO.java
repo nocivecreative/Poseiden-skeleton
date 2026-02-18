@@ -1,20 +1,28 @@
 package com.nnk.springboot.dto.rulename;
 
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 public class CreateRuleNameDTO {
 
-    private String name;
-    private String description;
-    private String json;
-    private String template;
-    private String sqlStr;
-    private String sqlPart;
+    @NotBlank(message = "Name is mandatory")
+    private final String name;
+
+    @NotBlank(message = "Description is mandatory")
+    private final String description;
+
+    @NotBlank(message = "Json is mandatory")
+    private final String json;
+
+    @NotBlank(message = "Template is mandatory")
+    private final String template;
+
+    @NotBlank(message = "SQL is mandatory")
+    private final String sqlStr;
+
+    @NotBlank(message = "SQL Part is mandatory")
+    private final String sqlPart;
 }

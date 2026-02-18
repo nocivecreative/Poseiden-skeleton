@@ -20,50 +20,53 @@ public class RatingService {
 
     @Transactional(readOnly = true)
     public List<RatingDTO> getAllRatings() {
-        return ratingRepository
-                .findAll()
-                .stream()
-                .map(r -> new RatingDTO(
-                        r.getId(),
-                        r.getMoodysRating(),
-                        r.getSandPRating(),
-                        r.getFitchRating(),
-                        r.getOrderNumber()))
+        return ratingRepository.findAll().stream()
+                .map(r -> RatingDTO.builder()
+                        .id(r.getId())
+                        .moodysRating(r.getMoodysRating())
+                        .sandPRating(r.getSandPRating())
+                        .fitchRating(r.getFitchRating())
+                        .orderNumber(r.getOrderNumber())
+                        .build())
                 .toList();
     }
 
     @Transactional
     public void addRating(CreateRatingDTO dto) {
-        Rating rating = new Rating();
-        rating.setMoodysRating(dto.getMoodysRating());
-        rating.setSandPRating(dto.getSandPRating());
-        rating.setFitchRating(dto.getFitchRating());
-        rating.setOrderNumber(dto.getOrderNumber());
+        Rating rating = Rating.builder()
+                .moodysRating(dto.getMoodysRating())
+                .sandPRating(dto.getSandPRating())
+                .fitchRating(dto.getFitchRating())
+                .orderNumber(dto.getOrderNumber())
+                .build();
         ratingRepository.save(rating);
     }
 
     @Transactional(readOnly = true)
     public RatingDTO getRatingById(Integer id) {
         return ratingRepository.findById(id)
-                .map(r -> new RatingDTO(
-                        r.getId(),
-                        r.getMoodysRating(),
-                        r.getSandPRating(),
-                        r.getFitchRating(),
-                        r.getOrderNumber()))
+                .map(r -> RatingDTO.builder()
+                        .id(r.getId())
+                        .moodysRating(r.getMoodysRating())
+                        .sandPRating(r.getSandPRating())
+                        .fitchRating(r.getFitchRating())
+                        .orderNumber(r.getOrderNumber())
+                        .build())
                 .orElseThrow(() -> new IllegalArgumentException("Rating not found with id: " + id));
     }
 
     @Transactional
     public void updateRating(Integer id, RatingDTO dto) {
-        Rating rating = ratingRepository.findById(id)
+        ratingRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Rating not found with id: " + id));
 
-        rating.setMoodysRating(dto.getMoodysRating());
-        rating.setSandPRating(dto.getSandPRating());
-        rating.setFitchRating(dto.getFitchRating());
-        rating.setOrderNumber(dto.getOrderNumber());
-
+        Rating rating = Rating.builder()
+                .id(id)
+                .moodysRating(dto.getMoodysRating())
+                .sandPRating(dto.getSandPRating())
+                .fitchRating(dto.getFitchRating())
+                .orderNumber(dto.getOrderNumber())
+                .build();
         ratingRepository.save(rating);
     }
 
