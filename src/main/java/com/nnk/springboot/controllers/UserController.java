@@ -75,4 +75,9 @@ public class UserController {
         model.addAttribute("users", userRepository.findAll());
         return "redirect:/user/list";
     }
+
+    @GetMapping("/403")
+    public String accessDenied() {
+        return "403";
+    }
 }
