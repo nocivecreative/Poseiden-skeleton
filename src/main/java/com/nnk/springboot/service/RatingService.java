@@ -12,12 +12,20 @@ import com.nnk.springboot.repositories.RatingRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Service de gestion des Rating.
+ */
 @Service
 @RequiredArgsConstructor
 public class RatingService {
 
     private final RatingRepository ratingRepository;
 
+    /**
+     * Retourne la liste de tous les ratings.
+     *
+     * @return liste des ratings
+     */
     @Transactional(readOnly = true)
     public List<RatingDTO> getAllRatings() {
         return ratingRepository.findAll().stream()
@@ -31,6 +39,11 @@ public class RatingService {
                 .toList();
     }
 
+    /**
+     * Crée et persiste un nouveau rating.
+     *
+     * @param dto données du rating à créer
+     */
     @Transactional
     public void addRating(CreateRatingDTO dto) {
         Rating rating = Rating.builder()
@@ -42,6 +55,13 @@ public class RatingService {
         ratingRepository.save(rating);
     }
 
+    /**
+     * Retourne un rating par son identifiant.
+     *
+     * @param id identifiant du rating
+     * @return le rating correspondant
+     * @throws IllegalArgumentException si l'identifiant est introuvable
+     */
     @Transactional(readOnly = true)
     public RatingDTO getRatingById(Integer id) {
         return ratingRepository.findById(id)
@@ -55,6 +75,13 @@ public class RatingService {
                 .orElseThrow(() -> new IllegalArgumentException("Rating not found with id: " + id));
     }
 
+    /**
+     * Met à jour un rating existant.
+     *
+     * @param id  identifiant du rating à modifier
+     * @param dto nouvelles données
+     * @throws IllegalArgumentException si l'identifiant est introuvable
+     */
     @Transactional
     public void updateRating(Integer id, RatingDTO dto) {
         ratingRepository.findById(id)
@@ -70,6 +97,12 @@ public class RatingService {
         ratingRepository.save(rating);
     }
 
+    /**
+     * Supprime un rating par son identifiant.
+     *
+     * @param id identifiant du rating à supprimer
+     * @throws IllegalArgumentException si l'identifiant est introuvable
+     */
     @Transactional
     public void deleteRating(Integer id) {
         if (!ratingRepository.existsById(id))

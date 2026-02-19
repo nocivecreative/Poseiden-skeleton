@@ -12,12 +12,20 @@ import com.nnk.springboot.repositories.BidListRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Service de gestion des BidList.
+ */
 @Service
 @RequiredArgsConstructor
 public class BidListService {
 
     private final BidListRepository bidListRepository;
 
+    /**
+     * Retourne la liste de toutes les bidlists.
+     *
+     * @return liste des bidlists
+     */
     @Transactional(readOnly = true)
     public List<BidListDTO> getAllBidList() {
         return bidListRepository.findAll().stream()
@@ -30,6 +38,11 @@ public class BidListService {
                 .toList();
     }
 
+    /**
+     * Crée et persiste une nouvelle bidlist.
+     *
+     * @param createBidListDTO données de la bidlist à créer
+     */
     @Transactional
     public void addBidList(CreateBidListDTO createBidListDTO) {
         BidList bl = BidList.builder()
@@ -40,6 +53,13 @@ public class BidListService {
         bidListRepository.save(bl);
     }
 
+    /**
+     * Retourne une bidlist par son identifiant.
+     *
+     * @param id identifiant de la bidlist
+     * @return la bidlist correspondante
+     * @throws IllegalArgumentException si l'identifiant est introuvable
+     */
     @Transactional(readOnly = true)
     public BidListDTO getBidListById(Integer id) {
         return bidListRepository.findById(id)
@@ -52,6 +72,13 @@ public class BidListService {
                 .orElseThrow(() -> new IllegalArgumentException("BidList not found with id: " + id));
     }
 
+    /**
+     * Met à jour une bidlist existante.
+     *
+     * @param id    identifiant de la bidlist à modifier
+     * @param blDTO nouvelles données
+     * @throws IllegalArgumentException si l'identifiant est introuvable
+     */
     @Transactional
     public void updateBidList(Integer id, BidListDTO blDTO) {
         bidListRepository.findById(id)
@@ -67,6 +94,12 @@ public class BidListService {
         bidListRepository.save(bl);
     }
 
+    /**
+     * Supprime une bidlist par son identifiant.
+     *
+     * @param id identifiant de la bidlist à supprimer
+     * @throws IllegalArgumentException si l'identifiant est introuvable
+     */
     @Transactional
     public void deleteBidList(Integer id) {
         if (!bidListRepository.existsById(id))

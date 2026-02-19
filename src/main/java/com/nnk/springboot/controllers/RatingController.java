@@ -18,6 +18,9 @@ import com.nnk.springboot.service.RatingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Contrôleur CRUD pour les Rating.
+ */
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/rating")
@@ -25,6 +28,9 @@ public class RatingController {
 
     private final RatingService ratingService;
 
+    /**
+     * Affiche la liste des ratings.
+     */
     @GetMapping("/list")
     public String home(Model model) {
         List<RatingDTO> ratings = ratingService.getAllRatings();
@@ -32,12 +38,18 @@ public class RatingController {
         return "rating/list";
     }
 
+    /**
+     * Affiche le formulaire de création d'un rating.
+     */
     @GetMapping("/add")
     public String addRatingForm(Model model) {
         model.addAttribute("rating", CreateRatingDTO.builder().build());
         return "rating/add";
     }
 
+    /**
+     * Valide et enregistre un nouveau rating.
+     */
     @PostMapping("/validate")
     public String validate(@Valid @ModelAttribute("rating") CreateRatingDTO createRatingDTO,
             BindingResult result,
@@ -51,6 +63,9 @@ public class RatingController {
         return "redirect:/rating/list";
     }
 
+    /**
+     * Affiche le formulaire de modification d'un rating.
+     */
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         RatingDTO rating = ratingService.getRatingById(id);
@@ -58,6 +73,9 @@ public class RatingController {
         return "rating/update";
     }
 
+    /**
+     * Valide et applique la modification d'un rating.
+     */
     @PostMapping("/update/{id}")
     public String updateRating(@PathVariable("id") Integer id,
             @Valid @ModelAttribute("rating") RatingDTO rating,
@@ -71,6 +89,9 @@ public class RatingController {
         return "redirect:/rating/list";
     }
 
+    /**
+     * Supprime un rating par son identifiant.
+     */
     @GetMapping("/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
         ratingService.deleteRating(id);

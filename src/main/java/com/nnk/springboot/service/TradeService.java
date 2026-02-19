@@ -12,12 +12,20 @@ import com.nnk.springboot.repositories.TradeRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Service de gestion des Trade.
+ */
 @Service
 @RequiredArgsConstructor
 public class TradeService {
 
     private final TradeRepository tradeRepository;
 
+    /**
+     * Retourne la liste de tous les trades.
+     *
+     * @return liste des trades
+     */
     @Transactional(readOnly = true)
     public List<TradeDTO> getAllTrades() {
         return tradeRepository.findAll().stream()
@@ -30,6 +38,11 @@ public class TradeService {
                 .toList();
     }
 
+    /**
+     * Crée et persiste un nouveau trade.
+     *
+     * @param dto données du trade à créer
+     */
     @Transactional
     public void addTrade(CreateTradeDTO dto) {
         Trade trade = Trade.builder()
@@ -40,6 +53,13 @@ public class TradeService {
         tradeRepository.save(trade);
     }
 
+    /**
+     * Retourne un trade par son identifiant.
+     *
+     * @param id identifiant du trade
+     * @return le trade correspondant
+     * @throws IllegalArgumentException si l'identifiant est introuvable
+     */
     @Transactional(readOnly = true)
     public TradeDTO getTradeById(Integer id) {
         return tradeRepository.findById(id)
@@ -52,6 +72,13 @@ public class TradeService {
                 .orElseThrow(() -> new IllegalArgumentException("Trade not found with id: " + id));
     }
 
+    /**
+     * Met à jour un trade existant.
+     *
+     * @param id  identifiant du trade à modifier
+     * @param dto nouvelles données
+     * @throws IllegalArgumentException si l'identifiant est introuvable
+     */
     @Transactional
     public void updateTrade(Integer id, TradeDTO dto) {
         tradeRepository.findById(id)
@@ -66,6 +93,12 @@ public class TradeService {
         tradeRepository.save(trade);
     }
 
+    /**
+     * Supprime un trade par son identifiant.
+     *
+     * @param id identifiant du trade à supprimer
+     * @throws IllegalArgumentException si l'identifiant est introuvable
+     */
     @Transactional
     public void deleteTrade(Integer id) {
         if (!tradeRepository.existsById(id))

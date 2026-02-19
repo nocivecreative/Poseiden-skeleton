@@ -18,6 +18,9 @@ import com.nnk.springboot.service.TradeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Contrôleur CRUD pour les Trade.
+ */
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/trade")
@@ -25,6 +28,9 @@ public class TradeController {
 
     private final TradeService tradeService;
 
+    /**
+     * Affiche la liste des trades.
+     */
     @GetMapping("/list")
     public String home(Model model) {
         List<TradeDTO> trades = tradeService.getAllTrades();
@@ -32,12 +38,18 @@ public class TradeController {
         return "trade/list";
     }
 
+    /**
+     * Affiche le formulaire de création d'un trade.
+     */
     @GetMapping("/add")
     public String addTradeForm(Model model) {
         model.addAttribute("trade", CreateTradeDTO.builder().build());
         return "trade/add";
     }
 
+    /**
+     * Valide et enregistre un nouveau trade.
+     */
     @PostMapping("/validate")
     public String validate(@Valid @ModelAttribute("trade") CreateTradeDTO createTradeDTO,
             BindingResult result,
@@ -51,6 +63,9 @@ public class TradeController {
         return "redirect:/trade/list";
     }
 
+    /**
+     * Affiche le formulaire de modification d'un trade.
+     */
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         TradeDTO trade = tradeService.getTradeById(id);
@@ -58,6 +73,9 @@ public class TradeController {
         return "trade/update";
     }
 
+    /**
+     * Valide et applique la modification d'un trade.
+     */
     @PostMapping("/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id,
             @Valid @ModelAttribute("trade") TradeDTO trade,
@@ -71,6 +89,9 @@ public class TradeController {
         return "redirect:/trade/list";
     }
 
+    /**
+     * Supprime un trade par son identifiant.
+     */
     @GetMapping("/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
         tradeService.deleteTrade(id);
