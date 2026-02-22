@@ -34,7 +34,6 @@ public class SecurityUser implements UserDetails {
         this.username = user.getUsername();
         this.role = user.getRole();
         this.password = user.getPassword();
-        // this.authorities = List.of(new SimpleGrantedAuthority("ROLE_USER"));
         this.authorities = List.of(new SimpleGrantedAuthority(ROLE_PREFIX + this.role));
     }
 

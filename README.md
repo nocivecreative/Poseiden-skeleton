@@ -33,7 +33,13 @@ Ce projet à été créé dans le cadre de ma formation **Développeur d'applica
 
 
 ### Variable à modifier/créer :
+
+Fichier : application.properties
+
+Binding avec datasource :
 > spring.datasource.poseidon.url=jdbc:mysql://localhost:3307/poseidon?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+
+Username SQL :
 > spring.datasource.poseidon.username=[USERNAME]
 
 ### injection de password DB : via variable d'environnement système :
@@ -45,7 +51,7 @@ Ce projet à été créé dans le cadre de ma formation **Développeur d'applica
 
 ## Execution des tests :
 
-> mvn clen test 
+> mvn clean test 
 
 ## Rapport de couverture Jacoco :
 

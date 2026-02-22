@@ -25,7 +25,7 @@ public class BidList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BidListId")
-    // TODO : prze : ALTER TABLE pour integer Vs. tinyint (seuleument 127 entrées
+    // Modification script SQL pour integer Vs. tinyint (seuleument 127 entrées
     // possible)
     private Integer bidListId;
 
@@ -74,14 +74,16 @@ public class BidList {
     private final String creationName;
 
     @Column(name = "creationDate")
-    // TODO : prez : DEFAULT NULL ('0000-00-00 00:00:00' pas accepté en mysql 8+)
+    // Modification script SQL DEFAULT : NULL ('0000-00-00 00:00:00' pas accepté en
+    // mysql 8+)
     private final Timestamp creationDate;
 
     @Column(name = "revisionName", length = 125)
     private final String revisionName;
 
     @Column(name = "revisionDate")
-    // TODO : prez : DEFAULT NULL ('0000-00-00 00:00:00' pas accepté en mysql 8+)
+    // Modification script SQL : DEFAULT NULL ('0000-00-00 00:00:00' pas accepté en
+    // mysql 8+)
     private final Timestamp revisionDate;
 
     @Column(name = "dealName", length = 125)
