@@ -1,27 +1,52 @@
-# spring-boot
+# OpenClassrooms - Cursrus Dev Java #
+Ce projet à été créé dans le cadre de ma formation **Développeur d'application Java** dispensée par [OpenClassrooms](https://openclassrooms.com/)
+
+## Contexte
+> ### Étudiant  : **Franck Mounier** ###
+> ### Projet : P7 - Complétez votre backend pour rendre votre application plus sécurisée ###
+> ### Type : Livrable ###
+> #### Repo source : [Lien github](https://github.com/OpenClassrooms-Student-Center/JavaDA_PROJECT7_RESTAPI) ####
+> #### Date de démarrage du projet : 06/02/2026 ####
+
+# Poseidon Capital Solution
 ## Technical:
 
-1. Spring Boot 3.1.0
-2. Java 17
-3. Thymeleaf
-4. Bootstrap v.4.3.1
+1. Spring Boot 4.0.2
+2. Java 25 
+3. Thymeleaf 3.1+
+4. Bootstrap v.4.3.1 
 
 
-## Setup with Intellij IDE
-1. Create project from Initializr: File > New > project > Spring Initializr
-2. Add lib repository into pom.xml
-3. Add folders
-    - Source root: src/main/java
-    - View: src/main/resources
-    - Static: src/main/resource/static
-4. Create database with name "demo" as configuration in application.properties
-5. Run sql script to create table doc/data.sql
+## DataBase init
+> Mysql 8+
+> Script d'initialisation : doc\data_v2.sql
 
-## Implement a Feature
-1. Create mapping domain class and place in package com.nnk.springboot.domain
-2. Create repository class and place in package com.nnk.springboot.repositories
-3. Create controller class and place in package com.nnk.springboot.controllers
+2 utilisateurs test sont créés :
 
-## Security
-1. Create user service to load user from  database and place in package com.nnk.springboot.services
-2. Add configuration class and place in package com.nnk.springboot.config
+> User
+> login : user
+> password : Azerty12*
+
+> Administrator
+> login : admin
+> password : Azerty12*
+
+
+### Variable à modifier/créer :
+> spring.datasource.poseidon.url=jdbc:mysql://localhost:3307/poseidon?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+> spring.datasource.poseidon.username=[USERNAME]
+
+### injection de password DB : via variable d'environnement système :
+> (SPRING_DATASOURCE_POSEIDON_PASSWORD) ou dans application.properties : spring.datasource.poseidon.password=[PASSWORD]
+
+## Démarrage de l'application :
+
+> mvn spring-boot:run
+
+## Execution des tests :
+
+> mvn clen test 
+
+## Rapport de couverture Jacoco :
+
+> mvn jacoco:report
