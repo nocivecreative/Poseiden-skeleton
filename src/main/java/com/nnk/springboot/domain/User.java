@@ -23,16 +23,14 @@ public class User {
     private String username;
 
     @NotBlank(message = "Password is mandatory")
-    @Pattern(
-        regexp = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{8,}$",
-        message = "Password must be at least 8 characters and contain an uppercase letter, a digit, and a special character"
-    )
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{8,}$", message = "Password must be at least 8 characters and contain an uppercase letter, a digit, and a special character")
     private String password;
 
     @NotBlank(message = "FullName is mandatory")
     private String fullname;
 
     @NotBlank(message = "Role is mandatory")
+    @Pattern(regexp = "^(USER|ADMIN)$", message = "Role must be USER or ADMIN") // OWASP - Security Misconfiguration
     private String role;
 
 }
