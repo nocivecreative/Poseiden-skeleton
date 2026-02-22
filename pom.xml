@@ -110,14 +110,6 @@
 							<artifactId>lombok</artifactId>
 						</path>
 					</annotationProcessorPaths>
-					<!-- Exclure les anciens tests incompatibles avec le pattern @Builder -->
-					<testExcludes>
-						<testExclude>**/BidTests.java</testExclude>
-						<testExclude>**/CurvePointTests.java</testExclude>
-						<testExclude>**/RatingTests.java</testExclude>
-						<testExclude>**/RuleTests.java</testExclude>
-						<testExclude>**/TradeTests.java</testExclude>
-					</testExcludes>
 				</configuration>
 			</plugin>
 			<plugin>
