@@ -1,0 +1,103 @@
+
+CREATE TABLE BidList (
+  BidListId int NOT NULL AUTO_INCREMENT,
+  account VARCHAR(30) NOT NULL,
+  type VARCHAR(30) NOT NULL,
+  bidQuantity DOUBLE DEFAULT NULL,
+  askQuantity DOUBLE DEFAULT NULL,
+  bid DOUBLE  DEFAULT NULL,
+  ask DOUBLE DEFAULT NULL,
+  benchmark VARCHAR(125) DEFAULT NULL,
+  bidListDate TIMESTAMP DEFAULT NULL,
+  commentary VARCHAR(125) DEFAULT NULL,
+  security VARCHAR(125) DEFAULT NULL,
+  status VARCHAR(10) DEFAULT NULL,
+  trader VARCHAR(125) DEFAULT NULL,
+  book VARCHAR(125) DEFAULT NULL,
+  creationName VARCHAR(125) DEFAULT NULL,
+  creationDate TIMESTAMP  DEFAULT NULL,
+  revisionName VARCHAR(125) DEFAULT NULL,
+  revisionDate TIMESTAMP  DEFAULT NULL,
+  dealName VARCHAR(125) DEFAULT NULL,
+  dealType VARCHAR(125) DEFAULT NULL,
+  sourceListId VARCHAR(125) DEFAULT NULL,
+  side VARCHAR(125) DEFAULT NULL,
+
+  PRIMARY KEY (BidListId)
+)
+
+CREATE TABLE Trade (
+  TradeId int NOT NULL AUTO_INCREMENT,
+  account VARCHAR(30) NOT NULL,
+  type VARCHAR(30) NOT NULL,
+  buyQuantity DOUBLE DEFAULT NULL,
+  sellQuantity DOUBLE DEFAULT NULL,
+  buyPrice DOUBLE  DEFAULT NULL,
+  sellPrice DOUBLE DEFAULT NULL,
+  tradeDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  security VARCHAR(125) DEFAULT NULL,
+  status VARCHAR(10) DEFAULT NULL,
+  trader VARCHAR(125) DEFAULT NULL,
+  benchmark VARCHAR(125) DEFAULT NULL,
+  book VARCHAR(125) DEFAULT NULL,
+  creationName VARCHAR(125) DEFAULT NULL,
+  creationDate TIMESTAMP  DEFAULT NULL,
+  revisionName VARCHAR(125) DEFAULT NULL,
+  revisionDate TIMESTAMP  DEFAULT NULL,
+  dealName VARCHAR(125) DEFAULT NULL,
+  dealType VARCHAR(125) DEFAULT NULL,
+  sourceListId VARCHAR(125) DEFAULT NULL,
+  side VARCHAR(125) DEFAULT NULL,
+
+  PRIMARY KEY (TradeId)
+)
+
+CREATE TABLE CurvePoint (
+  Id int NOT NULL AUTO_INCREMENT,
+  CurveId int DEFAULT NULL,
+  asOfDate TIMESTAMP DEFAULT NULL,
+  term DOUBLE  DEFAULT NULL,
+  value DOUBLE  DEFAULT NULL,
+  creationDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (Id)
+)
+
+CREATE TABLE Rating (
+  Id int NOT NULL AUTO_INCREMENT,
+  moodysRating VARCHAR(125) DEFAULT NULL,
+  sandPRating VARCHAR(125) DEFAULT NULL,
+  fitchRating VARCHAR(125) DEFAULT NULL,
+  orderNumber int DEFAULT NULL,
+
+  PRIMARY KEY (Id)
+)
+
+CREATE TABLE RuleName (
+  Id int NOT NULL AUTO_INCREMENT,
+  name VARCHAR(125) DEFAULT NULL,
+  description VARCHAR(125) DEFAULT NULL,
+  json VARCHAR(125) DEFAULT NULL,
+  template VARCHAR(512) DEFAULT NULL,
+  sqlStr VARCHAR(125) DEFAULT NULL,
+  sqlPart VARCHAR(125) DEFAULT NULL,
+
+  PRIMARY KEY (Id)
+)
+
+CREATE TABLE Users (
+  Id int NOT NULL AUTO_INCREMENT,
+  username NOT NULL VARCHAR(125),
+  password NOT NULL VARCHAR(125),
+  fullname NOT NULL VARCHAR(125),
+  role NOT NULL VARCHAR(125),
+
+  PRIMARY KEY (Id)
+)
+
+/*
+Users test = 'user', 'admin'
+Passwords for both test users = 'Azerty12*' 
+*/
+insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ADMIN")
+insert into Users(fullname, username, password, role) values("User", "user", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "USER")
