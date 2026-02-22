@@ -92,7 +92,7 @@ public class RatingController {
     /**
      * Supprime un rating par son identifiant.
      */
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
         ratingService.deleteRating(id);
         return "redirect:/rating/list";

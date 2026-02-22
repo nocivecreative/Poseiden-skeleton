@@ -95,7 +95,7 @@ public class BidListController {
     /**
      * Supprime une bidlist par son identifiant.
      */
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         bidListService.deleteBidList(id);
         return "redirect:/bidList/list";

@@ -92,7 +92,7 @@ public class CurveController {
     /**
      * Supprime un point de courbe par son identifiant.
      */
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteCurvePoint(@PathVariable("id") Integer id, Model model) {
         curvePointService.deleteCurvePoint(id);
         return "redirect:/curvePoint/list";

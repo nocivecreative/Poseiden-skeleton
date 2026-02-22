@@ -92,7 +92,7 @@ public class RuleNameController {
     /**
      * Supprime une règle par son identifiant.
      */
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
         ruleNameService.deleteRuleName(id);
         return "redirect:/ruleName/list";

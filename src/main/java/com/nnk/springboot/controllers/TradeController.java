@@ -92,7 +92,7 @@ public class TradeController {
     /**
      * Supprime un trade par son identifiant.
      */
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
         tradeService.deleteTrade(id);
         return "redirect:/trade/list";
