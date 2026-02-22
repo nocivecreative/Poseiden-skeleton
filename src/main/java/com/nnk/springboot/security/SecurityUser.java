@@ -12,7 +12,8 @@ import com.nnk.springboot.domain.User;
 import lombok.Getter;
 
 /**
- * Cette Class est crée uniquement pour différencier le type User de PayMyBuddy
+ * Cette Class est crée uniquement pour différencier le type User de
+ * l'application
  * du type User de spring security et éviter la confusion
  * (org.springframework.security.core.userdetails.User)
  * 
