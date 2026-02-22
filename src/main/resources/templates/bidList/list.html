@@ -44,7 +44,7 @@
 				<tbody>
 					<tr th:each="bidList : ${bidLists}">
 						<td class="w-10" th:text="${bidList.bidListId}"></td>
-						<!-- TODO *{id} : Incohérence avec l'entité, au sein du même template -->
+						<!-- DONE *{id} : Incohérence avec l'entité, au sein du même template -->
 						<td th:text="${bidList.account}"></td>
 						<td th:text="${bidList.type}"></td>
 						<td th:text="${bidList.bidQuantity}"></td>

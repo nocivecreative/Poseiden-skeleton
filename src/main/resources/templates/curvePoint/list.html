@@ -44,7 +44,6 @@
 					<tr th:each="curvePoint : ${curvePoints}">
 						<td class="w-10" th:text="${curvePoint.id}"></td>
 						<td th:text="${curvePoint.curveId}"></td>
-						<!-- TODO : Deux fois curvePoint.id dans le template d'origine, erreur ? -->
 						<td th:text="${curvePoint.term}"></td>
 						<td th:text="${curvePoint.value}"></td>
 						<td class="text-center w-15">

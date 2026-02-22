@@ -24,7 +24,7 @@ public class CurvePoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    // TODO : prze : ALTER TABLE pour integer Vs. tinyint (seuleument 127 entrées
+    // Modification script SQL pour integer Vs. tinyint (seuleument 127 entrées
     // possible)
     private final Integer id;
 
