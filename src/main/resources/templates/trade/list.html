@@ -5,6 +5,7 @@
 	<meta charset="utf-8" />
 	<title>Home</title>
 	<link rel="stylesheet" href="../../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../css/style.css">
 </head>
 
 <body>
@@ -41,11 +42,11 @@
 				</thead>
 				<tbody>
 					<tr th:each="trade : ${trades}">
-						<td style="width: 10%" th:text="${trade.tradeId}"></td>
+						<td class="w-10" th:text="${trade.tradeId}"></td>
 						<td th:text="${trade.account}"></td>
 						<td th:text="${trade.type}"></td>
 						<td th:text="${trade.buyQuantity}"></td>
-						<td style="width: 15%" class="text-center">
+						<td class="text-center w-15">
 							<!-- <a th:href="@{/trade/update/{id}(id=${trade.tradeId})}">Edit</a> -->
 							<form th:action="@{/trade/update/{id}(id=${trade.tradeId})}" method="get"
 								class="d-inline">

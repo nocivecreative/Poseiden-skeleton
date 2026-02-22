@@ -5,6 +5,7 @@
 	<meta charset="utf-8" />
 	<title>Home</title>
 	<link rel="stylesheet" href="../../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../css/style.css">
 </head>
 
 <body>
@@ -42,12 +43,12 @@
 				</thead>
 				<tbody>
 					<tr th:each="rating : ${ratings}">
-						<td style="width: 10%" th:text="${rating.id}"></td>
+						<td class="w-10" th:text="${rating.id}"></td>
 						<td th:text="${rating.moodysRating}"></td>
 						<td th:text="${rating.sandPRating}"></td>
 						<td th:text="${rating.fitchRating}"></td>
 						<td th:text="${rating.orderNumber}"></td>
-						<td style="width: 15%" class="text-center">
+						<td class="text-center w-15">
 							<!-- <a th:href="@{/rating/update/{id}(id=${rating.id})}">Edit</a> -->
 							<form th:action="@{/rating/update/{id}(id=${rating.id})}" method="get" class="d-inline">
 								<button class="btn btn-primary btn-sm" type="submit">Edit</button>

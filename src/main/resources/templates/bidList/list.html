@@ -5,6 +5,7 @@
 	<meta charset="utf-8" />
 	<title>Home</title>
 	<link rel="stylesheet" href="../../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../css/style.css">
 </head>
 
 <body>
@@ -42,12 +43,12 @@
 				</thead>
 				<tbody>
 					<tr th:each="bidList : ${bidLists}">
-						<td style="width: 10%" th:text="${bidList.bidListId}"></td>
+						<td class="w-10" th:text="${bidList.bidListId}"></td>
 						<!-- TODO *{id} : Incohérence avec l'entité, au sein du même template -->
 						<td th:text="${bidList.account}"></td>
 						<td th:text="${bidList.type}"></td>
 						<td th:text="${bidList.bidQuantity}"></td>
-						<td style="width: 15%" class="text-center">
+						<td class="text-center w-15">
 							<!-- <a th:href="@{/bidList/update/{id}(id=${bidList.bidListId})}">Edit</a> -->
 							<form th:action="@{/bidList/update/{id}(id=${bidList.bidListId})}" method="get" class="d-inline">
 								<button class="btn btn-primary btn-sm" type="submit">Edit</button>

@@ -5,6 +5,7 @@
 	<meta charset="utf-8" />
 	<title>Home</title>
 	<link rel="stylesheet" href="../../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../css/style.css">
 </head>
 
 <body>
@@ -41,12 +42,12 @@
 				</thead>
 				<tbody>
 					<tr th:each="curvePoint : ${curvePoints}">
-						<td style="width: 10%" th:text="${curvePoint.id}"></td>
+						<td class="w-10" th:text="${curvePoint.id}"></td>
 						<td th:text="${curvePoint.curveId}"></td>
 						<!-- TODO : Deux fois curvePoint.id dans le template d'origine, erreur ? -->
 						<td th:text="${curvePoint.term}"></td>
 						<td th:text="${curvePoint.value}"></td>
-						<td style="width: 15%" class="text-center">
+						<td class="text-center w-15">
 							<!-- <a th:href="@{/curvePoint/update/{id}(id=${curvePoint.id})}">Edit</a> -->
 							<form th:action="@{/curvePoint/update/{id}(id=${curvePoint.id})}" method="get"
 								class="d-inline">

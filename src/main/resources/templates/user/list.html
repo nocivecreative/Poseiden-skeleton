@@ -31,11 +31,11 @@
 			</thead>
 			<tbody>
 				<tr th:each="user : ${users}">
-					<td style="width: 10%" th:text="${user.id}"></td>
+					<td class="w-10" th:text="${user.id}"></td>
 					<td th:text="${user.fullname}"></td>
 					<td th:text="${user.username}"></td>
-					<td style="width: 25%" th:text="${user.role}"></td>
-					<td style="width: 15%" class="text-center">
+					<td class="w-25" th:text="${user.role}"></td>
+					<td class="text-center w-15">
 						<a th:href="@{/user/update/{id}(id=${user.id})}">Edit</a>&nbsp;|&nbsp;
 						<a th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
 					</td>

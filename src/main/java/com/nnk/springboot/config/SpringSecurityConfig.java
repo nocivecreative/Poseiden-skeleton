@@ -18,72 +18,77 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SpringSecurityConfig {
 
-    private final CustomUserDetailsService customUserDetailsService;
+        private final CustomUserDetailsService customUserDetailsService;
 
-    /**
-     * Configure la filter chain de Spring Security
-     * 
-     * Défini les règles d'autorisation:
-     * - Ouvre toutes les requetes à /user/** sans autorisation (signup, signin,..)
-     * - exige une authentification avec un role USER pour les endpoints /profil/**
-     * - Exige une authentification pour toutes les autres requetes
-     * 
-     * Active le login via formulaire et l'authentification HTTP Basique avec les
-     * paramètres par défaut.
-     * 
-     * @param http l'objet {@link HttpSecurity} à configurer
-     * @return les filters configurés {@link SecurityFilterChain}
-     * @throws Exception si une erreur se produit pendant la configuration
-     */
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/signup", "/css/**", "/assets/**").permitAll()
-                        .requestMatchers("/user/**").hasRole("ADMIN")
-                        .anyRequest().hasAnyRole("USER", "ADMIN"))
-                .exceptionHandling(exception -> exception
-                        .accessDeniedPage("/403"))
-                .sessionManagement(session -> session
-                        .sessionFixation().migrateSession() // crée un nouvel ID de session -
-                                                            // Invalide l'ancienne
-                                                            // session
-                        .maximumSessions(1)) // une seule session active à la fois (Empêche le
-                                             // multi-login)
-                .formLogin(form -> form
-                        // .loginPage("/login") // GET
-                        .loginProcessingUrl("/login") // POST (important)
-                        .defaultSuccessUrl("/bidList/list", true)
-                        // .failureUrl("/login?error=true")
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout=true")
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
-                        .permitAll());
+        /**
+         * Configure la filter chain de Spring Security
+         * 
+         * Défini les règles d'autorisation:
+         * - Ouvre toutes les requetes à /user/** sans autorisation (signup, signin,..)
+         * - exige une authentification avec un role USER pour les endpoints /profil/**
+         * - Exige une authentification pour toutes les autres requetes
+         * 
+         * Active le login via formulaire et l'authentification HTTP Basique avec les
+         * paramètres par défaut.
+         * 
+         * @param http l'objet {@link HttpSecurity} à configurer
+         * @return les filters configurés {@link SecurityFilterChain}
+         * @throws Exception si une erreur se produit pendant la configuration
+         */
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+                http
+                                .authorizeHttpRequests(auth -> auth
+                                                .requestMatchers("/", "/login", "/signup", "/css/**", "/assets/**")
+                                                .permitAll()
+                                                .requestMatchers("/user/**").hasRole("ADMIN")
+                                                .anyRequest().hasAnyRole("USER", "ADMIN"))
+                                .exceptionHandling(exception -> exception
+                                                .accessDeniedPage("/403"))
+                                .sessionManagement(session -> session
+                                                .sessionFixation().migrateSession() // crée un nouvel ID de session -
+                                                                                    // Invalide l'ancienne
+                                                                                    // session
+                                                .maximumSessions(1)) // une seule session active à la fois (Empêche le
+                                                                     // multi-login)
+                                .formLogin(form -> form
+                                                // .loginPage("/login") // GET
+                                                .loginProcessingUrl("/login") // POST (important)
+                                                .defaultSuccessUrl("/bidList/list", true)
+                                                // .failureUrl("/login?error=true")
+                                                .permitAll())
+                                .logout(logout -> logout
+                                                .logoutUrl("/logout")
+                                                .logoutSuccessUrl("/login?logout=true")
+                                                .invalidateHttpSession(true)
+                                                .deleteCookies("JSESSIONID")
+                                                .permitAll())
+                                .headers(headers -> headers // Headers HTTP de sécurité absents (OWASP A05)
+                                                .contentSecurityPolicy(
+                                                                csp -> csp.policyDirectives("default-src 'self'"))
+                                                .frameOptions(frame -> frame.deny()));
 
-        return http.build();
-    }
+                return http.build();
+        }
 
-    /**
-     * Provides a BCrypt password encoder bean for secure password hashing.
-     * 
-     * @return a new instance of {@link BCryptPasswordEncoder}
-     */
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        /**
+         * Provides a BCrypt password encoder bean for secure password hashing.
+         * 
+         * @return a new instance of {@link BCryptPasswordEncoder}
+         */
+        @Bean
+        public BCryptPasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-    @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http,
-            BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder = http
-                .getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(customUserDetailsService)
-                .passwordEncoder(bCryptPasswordEncoder);
-        return authenticationManagerBuilder.build();
-    }
+        @Bean
+        public AuthenticationManager authenticationManager(HttpSecurity http,
+                        BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
+                AuthenticationManagerBuilder authenticationManagerBuilder = http
+                                .getSharedObject(AuthenticationManagerBuilder.class);
+                authenticationManagerBuilder.userDetailsService(customUserDetailsService)
+                                .passwordEncoder(bCryptPasswordEncoder);
+                return authenticationManagerBuilder.build();
+        }
 
 }
