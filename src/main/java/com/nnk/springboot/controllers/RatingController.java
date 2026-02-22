@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nnk.springboot.dto.rating.CreateRatingDTO;
 import com.nnk.springboot.dto.rating.RatingDTO;
-import com.nnk.springboot.service.RatingService;
+import com.nnk.springboot.service.IRatingService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/rating")
 public class RatingController {
 
-    private final RatingService ratingService;
+    private final IRatingService ratingService;
 
     /**
      * Affiche la liste des ratings.

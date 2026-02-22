@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nnk.springboot.dto.rulename.CreateRuleNameDTO;
 import com.nnk.springboot.dto.rulename.RuleNameDTO;
-import com.nnk.springboot.service.RuleNameService;
+import com.nnk.springboot.service.IRuleNameService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/ruleName")
 public class RuleNameController {
 
-    private final RuleNameService ruleNameService;
+    private final IRuleNameService ruleNameService;
 
     /**
      * Affiche la liste des règles.

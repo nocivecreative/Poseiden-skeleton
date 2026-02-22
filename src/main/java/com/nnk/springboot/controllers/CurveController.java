@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nnk.springboot.dto.curvepoint.CreateCurvePointDTO;
 import com.nnk.springboot.dto.curvepoint.CurvePointDTO;
-import com.nnk.springboot.service.CurvePointService;
+import com.nnk.springboot.service.ICurvePointService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/curvePoint")
 public class CurveController {
 
-    private final CurvePointService curvePointService;
+    private final ICurvePointService curvePointService;
 
     /**
      * Affiche la liste des points de courbe.

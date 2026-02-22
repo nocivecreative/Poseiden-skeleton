@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Service
 @RequiredArgsConstructor
-public class TradeService {
+public class TradeService implements ITradeService {
 
     private final TradeRepository tradeRepository;
 

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nnk.springboot.dto.bidlist.BidListDTO;
 import com.nnk.springboot.dto.bidlist.CreateBidListDTO;
-import com.nnk.springboot.service.BidListService;
+import com.nnk.springboot.service.IBidListService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/bidList")
 public class BidListController {
 
-    private final BidListService bidListService;
+    private final IBidListService bidListService;
 
     /**
      * Affiche la liste des bidlists.

@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Service
 @RequiredArgsConstructor
-public class RatingService {
+public class RatingService implements IRatingService {
 
     private final RatingRepository ratingRepository;
 

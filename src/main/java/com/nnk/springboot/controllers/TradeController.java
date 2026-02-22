@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nnk.springboot.dto.trade.CreateTradeDTO;
 import com.nnk.springboot.dto.trade.TradeDTO;
-import com.nnk.springboot.service.TradeService;
+import com.nnk.springboot.service.ITradeService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/trade")
 public class TradeController {
 
-    private final TradeService tradeService;
+    private final ITradeService tradeService;
 
     /**
      * Affiche la liste des trades.

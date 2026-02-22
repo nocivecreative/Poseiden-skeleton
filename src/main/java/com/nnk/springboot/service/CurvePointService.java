@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Service
 @RequiredArgsConstructor
-public class CurvePointService {
+public class CurvePointService implements ICurvePointService {
 
     private final CurvePointRepository curvePointRepository;
 

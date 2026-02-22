@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Service
 @RequiredArgsConstructor
-public class BidListService {
+public class BidListService implements IBidListService {
 
     private final BidListRepository bidListRepository;
 

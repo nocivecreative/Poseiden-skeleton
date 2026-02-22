@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Service
 @RequiredArgsConstructor
-public class RuleNameService {
+public class RuleNameService implements IRuleNameService {
 
     private final RuleNameRepository ruleNameRepository;
 
